@@ -1,0 +1,15 @@
+{
+  "name": "clymer-metal-crafts",
+  "version": "1.0.0",
+  "description": "item viewer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "redux"
+  ],
+  "author": "Kristopher Lindsey",
+  "license": "ISC"
+}
