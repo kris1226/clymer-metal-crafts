@@ -1,28 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import { selectClient, invalidateClient, fetchClientsIfNeeded } from '../actions';
 import { connect } from 'react-redux';
-import Picker from '../components/Picker';
+import { pushState } from 'redux-router'
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleRefreshClick = this.handleRefreshClick.bind(this)
   }
-
-  componentDidMount() {
-    const { dispatch, selectedClient } = this.props;
-    debugger;
-    dispatch(fetchClientsIfNeeded());
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedClient !== this.props.selectedClient) {
-      const { dispatch } = nextProps;
-      dispatch(fetchClientsIfNeeded());
-    }
-   }
-
    handleChange(nextClient) {
      this.props.dispatch(selectClient(nextClient));
    }
@@ -35,49 +18,30 @@ class App extends Component {
    }
 
   render() {
-    const { selectedClient, smartAgent, isFetching, lastUpdated } = this.props;
-    const { items } = smartAgent;
-    const sum = items.reduce((all, items, index) => {
-      all += item.login;
-      return all;
-    })
-    console.log(sum);
+    const { children, items } = this.props;
+    debugger;
     return(
       <div>
-        <Picker value={selectedClient}
-                onChange={this.handleChange}
-                options={logins}
-        />
+        <h1>Rendering</h1>
       </div>
     );
   }
 }
 
 App.propTypes = {
-  selectedClient: PropTypes.string.isRequired,
-  smartAgent: PropTypes.object.isRequired,
+  selectedImage: PropTypes.string.isRequired,
+  images: PropTypes.object.isRequired,
   isFetching: PropTypes.bool.isRequired,
   lastUpdated: PropTypes.number,
   dispatch: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {
-  const { selectedClient, smartAgent } = state;
-  const {
-    isFetching,
-    lastUpdated,
-    items
-  } = smartAgent[selectedClient] || {
-    isFetching: true,
-    items: []
-  }
-    debugger;
   return {
-    selectedClient,
-    smartAgent,
-    isFetching,
-    lastUpdated
-  }
+    message: 'Rendering'
+  };
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, {
+  pushState
+})(App);

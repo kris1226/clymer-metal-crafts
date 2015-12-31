@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
+import images from './images';
+import { routerStateReducer as router } from 'redux-router';
 import {
-  SELECT_CLIENT, INVALIDATE_CLIENT,
-  REQUEST_CLIENTS, RECEIVE_CLIENTS
+  SELECT_IMAGE, INVALIDATE_IMAGE,
+  REQUEST_IMAGES, RECEIVE_IMAGES
 } from '../actions';
 
 function selectedClient(state = 'client', action) {
@@ -13,37 +15,9 @@ function selectedClient(state = 'client', action) {
   }
 }
 
-function smartAgent(state = {
-  isfetching: false,
-  didInvalidate: false,
-  items: []
-}, action) {
-  debugger;
-  switch (action.type) {
-    case INVALIDATE_CLIENT:
-      return Object.assign({}, state, {
-        didInvalidate: true
-      });
-    case REQUEST_CLIENTS:
-      return Object.assign({}, state, {
-        isfetching: false,
-        didInvalidate: false
-      });
-    case RECEIVE_CLIENTS:
-      return Object.assign({}, state, {
-        isfetching: false,
-        didInvalidate: false,
-        items: action.clients,
-        lastUpdated: action.receivedAt
-      });
-    default:
-      return state;
-  }
-}
-
 const rootReducer = combineReducers({
-    smartAgent,
-  selectedClient
+    images,
+    router
 });
 
 export default rootReducer;

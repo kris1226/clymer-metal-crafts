@@ -1,7 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { Call_API, Schemas } from '../middleware/api';
 
-export const REQUEST_CLIENTS = 'REQUEST_CLIENTS';
 export const REQUEST_DATA = 'REQUEST_CLIENTS';
 export const RECEIVE_CLIENTS = 'RECEIVE_CLIENTS';
 export const RECEIVE_DATA = 'RECEIVE_DATA';
@@ -23,9 +22,9 @@ export function invalidateClient(reddit) {
   }
 }
 
-function requestClients(clients) {
+function requestClients() {
   return {
-    type: REQUEST_CLIENTS
+    type: REQUEST_IMAGES
   };
 }
 
