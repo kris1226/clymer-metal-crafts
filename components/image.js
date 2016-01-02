@@ -1,27 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 
-class Image extends Component {
-  constructor(props, context) {
-    super(props, context)
-    this.state = {
-      des: 'loading',
-      status: true
-    }
-  }
-
-  handleSelect(id) {
-
-  }
-
-  render() {
-    const { image, selectImage } = this.props;
-  }
+const Image = ({ item }) => {
+  return (
+    <div className="product">
+      <div className="text">
+        <h3>{item.desc}</h3>
+        <p className="price">{item.price}</p>
+      </div>
+    </div>
+  );
 }
 
 Image.propTypes = {
-  image: PropTypes.object.isRequired,
-  selectImage: PropTypes.func.isRequired
-}
+  item: PropTypes.object.isRequired
+};
 
 export default Image;

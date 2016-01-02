@@ -10,13 +10,13 @@ var compiler = webpack(config);
 
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
-  publicPath: config.output.publicPath,
-  historyApiFallback: true 
+  publicPath: config.output.publicPath
 }));
 app.use(webpackHotMiddleware(compiler));
 
 app.get("/", function(req, res) {
   res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/img/logo-small.png')
 })
 
 app.listen(port, function(error) {
