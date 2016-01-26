@@ -4,18 +4,18 @@ import { ReduxRouter } from 'redux-router';
 import NavBar from '../containers/NavBar';
 import DevTools from './DevTools';
 
-
 export default class Root extends Component {
   render() {
     const { store } = this.props;
     return (
-      <Provider store={store}>
-        <div>
-          <NavBar />
-          <ReduxRouter />
-          <DevTools />
-        </div>
-      </Provider>
+      <div>
+        <Provider store={store}>
+          <div>
+            <ReduxRouter />
+            <DevTools />
+          </div>
+        </Provider>
+    </div>
     );
   }
 }

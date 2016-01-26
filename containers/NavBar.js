@@ -1,15 +1,18 @@
 import React, { Component, PropTypes } from 'react';
-import logo from '../img/logo.png';
-import smallLogo from '../img/logo-small.png';
+import { routeActions } from 'react-router-redux';
+import { Link } from 'react-router';
+import { connect } from 'react-redux'
+import logo from '../public/img/logo.png';
+import smallLogo from '../public/img/logo-small.png';
 
 
-const Logo = () => {
+const Logo = ({push, children}) => {
   return (
-      <a className="navbar-brand home" href="#">
+      <Link className="navbar-brand home" to="/">
         <img className="hidden xs hidden-sm" alt="CMC" src={logo} />
         <img className="visible-xs visible-sm" alt="CMC" src={smallLogo} />
         <span className="sr-only">Go to home page</span>
-      </a>
+      </Link>
   );
 }
 
@@ -17,8 +20,12 @@ const NavLinks = () => {
   return (
     <div className="navbar-collapse collapse" id="navigation">
       <ul className="nav navbar-nav navbar-left">
-        <li className="active"><a href="/">Home</a></li>
-        <li><a href="#">Contact</a></li>
+        <li className="active">
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/contact">Contact</Link>
+        </li>
       </ul>
     </div>
   );
@@ -39,23 +46,27 @@ const NavCollapse = () => {
   return (
     <div className="navbar-collapse collapse in" id="navigation" style={{height: 'auto'}}>
 		  <ul className="nav navbar-nav navbar-left">
-  			<li className="active"><a href="/">Home</a></li>
-  			<li><a href="/">Contact</a></li>
+  			<li className="active"><Link to="/">Home</Link></li>
+      <li><Link to="/contact">Contact</Link></li>
 		  </ul>
 		</div>
   );
 }
 
-export default () => {
-  return (
-    <div className="navbar navbar-default navbar-fixed-top yamm" id="navbar" role="navigation">
-      <div className="container">
-          <div className="navbar-header" href="#">
-            <Logo />
-            <NavButtons />
-          </div>
-        <NavCollapse />
+export default class NavBar extends Component {
+  render() {
+    return (
+      <div className="navbar navbar-default navbar-fixed-top yamm" id="navbar" role="navigation">
+        <div className="container">
+            <div className="navbar-header" href="#">
+              <Logo />
+              <NavButtons />
+            </div>
+          <NavCollapse />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
+
+export default NavBar;

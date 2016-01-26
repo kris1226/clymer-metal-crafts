@@ -1,50 +1,34 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { pushState } from 'redux-router';
-import Image from '../components/Image';
-
+import ImagesContainer from './ImagesContainer';
+import NavBar from '../containers/NavBar';
+import { connect } from 'react-redux'
+import { routeActions } from 'react-router-redux'
 
 class App extends Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
-   handleChange(nextClient) {
-     this.props.dispatch(selectClient(nextClient));
-   }
-
-   handleRefreshClick(e) {
-     e.preventDefault();
-     const { dispatch, selectedClient } = this.props;
-     dispatch(invalidateClient(selectedClient));
-     dispatch(fetchClientsIfNeeded());
-   }
-
   render() {
-    const { children, items } = this.props;
-    let first = items[0];
-
-    return(
+    const { children } = this.props;
+    return (
       <div>
-        <Image item={first} />
+        <NavBar />
+          <div id="all">
+            <div id="contnet">
+              <div className="container">
+                <div className="col-md-12">
+                  {children}
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
+
     );
   }
 }
 
-App.propTypes = {
-  //selectedImage: PropTypes.string.isRequired,
-  items: PropTypes.array.isRequired,
-  //isFetching: PropTypes.bool.isRequired,
-  //lastUpdated: PropTypes.number,
-  //dispatch: PropTypes.func.isRequired
-}
-
-function mapStateToProps(state) {
-  return {
-    items: state.images
-  };
-}
-
-export default connect(mapStateToProps, {
-  pushState
-})(App);
+export default connect(
+  null,
+  routeActions
+)(App);

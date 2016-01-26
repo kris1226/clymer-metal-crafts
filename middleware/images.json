@@ -1,0 +1,7 @@
+[
+  {"id": 1, "desc": "This is nice", "src": "public/img/DSC_3.png", "price": 0.00},
+  {"id": 2, "desc": "somthing else nice", "src": "public/img/1.png", "price": 0.00},
+  {"id": 3, "desc": "somthing even nicer", "src": "public/img/4.jpg", "price": 0.00},
+  {"id": 4, "desc": "Can it get better than this?", "src": "public/img/5.jpg", "price": 0.00 },
+  {"id": 5, "desc": "Well it just might...", "src": "public/img/bangle4.jpg", "price": 0.00 }
+]
