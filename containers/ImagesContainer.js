@@ -1,19 +1,22 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getVisibleImages, getImage } from '../reducers/images';
-import ImageItem from '../components/ImageItem';
-import ImagesList from '../components/ImagesList';
+import { routeActions } from 'react-router-redux';
+import ImageItem from '../components/ImageComponents/ImageItem';
+import ImagesList from '../components/ImageComponents/ImagesList';
 import { selectImage } from '../actions/imagesActions';
 
-class ImagesContianer extends Component {
+export default class ImagesContianer extends Component {
+  constructor(props) {
+    super(props)
+  }
   render() {
-    const { images, selectImage } = this.props;
+    const { images, selectImage, push } = this.props;
     return (
       <ImagesList>
         {images.map(image =>
           <ImageItem key={image.id}
-                     image={image}
-                     onSelectImageClick={() => selectImage(image.id) } />
+                     image={image} />
         )}
       </ImagesList>
     );
@@ -26,22 +29,34 @@ ImagesContianer.propTypes = {
     desc: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired
-  })).isRequired,
-  selectImage: PropTypes.func.isRequired
+  })).isRequired
 }
 
 function mapStateToProps(state) {
+  const { pathname } = state.routing.location;
   return {
-    images: getVisibleImages(state),
-    selectedImage: getImage(state)
+    images: getVisibleImages(state)
   }
 }
 
-export default connect(
-  mapStateToProps,
-  { selectImage }
-)(ImagesContianer);
+export default connect(mapStateToProps)(ImagesContianer);
 
+
+
+/** WEBPACK FOOTER **
+ ** D:/Code/Reactjs-Projects/clymer-metal-crafts/containers/ImagesContainer.js
+ **/
+
+
+
+/** WEBPACK FOOTER **
+ ** D:/Code/Reactjs-Projects/clymer-metal-crafts/containers/ImagesContainer.js
+ **/
+
+
+/** WEBPACK FOOTER **
+ ** D:/Code/Reactjs-Projects/clymer-metal-crafts/containers/ImagesContainer.js
+ **/
 
 
 /** WEBPACK FOOTER **

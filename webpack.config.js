@@ -26,7 +26,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loaders: ['babel'],
+        loaders: [ 'babel' ],
         exclude: /node_modules/,
         include: __dirname
       },
@@ -39,6 +39,12 @@ module.exports = {
         test: /\.css$/,
         include: __dirname,
         loader: 'style!css'
+      },
+      {
+        test: /\.json$/,
+        loaders: [ 'json' ],
+        exclude: /node_modules/,
+        include: __dirname
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
@@ -63,7 +69,7 @@ if (fs.existsSync(reduxSrc) && fs.existsSync(reduxNodeModules)) {
   // Compile Redux from source
   module.exports.module.loaders.push({
     test: /\.js$/,
-    loaders: ['babel'],
+    loaders: [ 'babel' ],
     include: reduxSrc
   });
 }

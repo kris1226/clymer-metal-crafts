@@ -1,7 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { syncHistory } from 'react-router-redux';
-import { browserHistory } from 'react-router';
-import { reduxReactRouter } from 'redux-router';
 import DevTools from '../containers/DevTools';
 import createLogger from 'redux-logger';
 import reducer from '../reducers/images';
@@ -23,6 +21,7 @@ export default function configureStore() {
   const store = finalCreateStore(reducer);
   store.dispatch(getAllImages());
   syncHistoryMiddleWare.listenForReplays(store);
+
   if(module.hot) {
     //enable webpack hot module replacment for reducers
     module.hot.accept('../reducers/images', () => {

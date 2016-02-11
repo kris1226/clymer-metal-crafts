@@ -1,26 +1,64 @@
-import { VIEW_DETAILS } from '../constants/actionTypes';
+import { combineReducers } from 'redux';
+import { routerStateReducer as router } from 'redux-router';
+import { routeReducer } from 'react-router-redux';
+import {
+  RECEIVE_IMAGES,
+  VIEW_IMAGE_DETAILS
+} from '../constants/actionTypes';
 
-const initialState = [
-  {
-    id: 1,
-    src:'',
-    desc: "somthing nice",
-    price: 0.00
-  }, {
-    id: 2,
-    desc: "somthing else nice",
-    src: '',
-    price: 0.00
-  }
-];
+export default combineReducers({
+  byId,
+  visibleIds,
+  images,
+  routing: routeReducer
+});
 
-export default function images(state = initialState, action) {
+ function images(state ={}, action) {
   switch (action.type) {
-    case VIEW_DETAILS:
-      return state.filter(todo =>
-        todo.id == action.id
-      );
+    case VIEW_IMAGE_DETAILS:
+      return {
+        ...state[action.imageId]
+      }
     default:
     return state;
   }
+}
+
+function byId(state = {}, action) {
+  switch (action.type) {
+    case RECEIVE_IMAGES:
+      return {
+        ...state,
+        ...action.images.reduce((obj, image) => {
+          obj[image.id] = image;
+          return obj;
+        }, {})
+      };
+    default:
+      const { imageId } = action;
+      if(imageId) {
+        return {
+          ...state[imageId],
+          [imageId]: images(state[imageId], action)
+        }
+      }
+      return state;
+  }
+}
+
+function visibleIds(state = [], action) {
+  switch (action.type) {
+    case RECEIVE_IMAGES:
+      return action.images.map(image => image.id);
+    default:
+      return state;
+  }
+}
+
+export function getImage(state, id) {
+  return state.byId[id];
+}
+
+export function getVisibleImages(state) {
+  return state.visibleIds.map(id => getImage(state, id));
 }

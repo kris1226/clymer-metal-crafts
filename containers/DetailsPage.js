@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
 import { loadUser } from '../actions/imagesActions';
-import Image from '../components/Image';
+import Image from '../components/ImageComponents/Image';
 
 class DetailsPage extends Component {
   render() {

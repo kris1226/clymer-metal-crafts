@@ -7,6 +7,7 @@ import DevTools from './DevTools';
 import createHistory from 'history/lib/createHashHistory';
 import ContactPage from './ContactPage';
 import ImagesContainer from './ImagesContainer';
+import DetailsPage from './DetailsPage';
 
 export default class ReactReduxRouterRoot extends Component {
   render() {
@@ -18,6 +19,7 @@ export default class ReactReduxRouterRoot extends Component {
             <Route path="/" component={App}>
               <IndexRoute component={ImagesContainer} />
               <Route path="contact" component={ContactPage} />
+              <Route path="image/:imageId" component={DetailsPage} />
             </Route>
           </Router>
           <DevTools />
@@ -30,3 +32,9 @@ export default class ReactReduxRouterRoot extends Component {
 ReactReduxRouterRoot.propTypes = {
   store: PropTypes.object.isRequired
 }
+
+
+
+/** WEBPACK FOOTER **
+ ** D:/Code/Reactjs-Projects/clymer-metal-crafts/containers/ReactReduxRouterRoot.js
+ **/

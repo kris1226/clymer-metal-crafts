@@ -4,7 +4,7 @@ import NavBar from '../containers/NavBar';
 import { connect } from 'react-redux'
 import { routeActions } from 'react-router-redux'
 
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props)
   }
@@ -26,6 +26,11 @@ class App extends Component {
 
     );
   }
+}
+
+App.propTypes = {
+  // Injected by React Router
+  children: PropTypes.node
 }
 
 export default connect(
