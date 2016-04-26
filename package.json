@@ -4,6 +4,7 @@
   "description": "item viewer",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "test": "SET NODE_ENV=test && mocha --recursive --compilers js:babel-core/register --require ./test/setup.js",
     "test:watch": "npm test -- --watch"
   },
@@ -11,6 +12,7 @@
     "type": "git",
     "url": "https://github.com/kris1226/clymer-metal-crafts.git"
   },
+  "license": "MIT",
   "keywords": [
     "react",
     "redux"
