@@ -4,7 +4,6 @@ import DevTools from '../containers/DevTools';
 import createLogger from 'redux-logger';
 import reducer from '../reducers/images';
 import thunk from 'redux-thunk';
-import { getAllImages } from '../actions/imagesActions';
 import createHistory from 'history/lib/createHashHistory'
 
 const history = createHistory()
@@ -19,7 +18,6 @@ const finalCreateStore = compose(
 
 export default function configureStore() {
   const store = finalCreateStore(reducer);
-  store.dispatch(getAllImages());
   syncHistoryMiddleWare.listenForReplays(store);
 
   if(module.hot) {

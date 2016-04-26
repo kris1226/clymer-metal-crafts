@@ -8,6 +8,19 @@ function fetchImagesRequest() {
   }
 };
 
+export function selectImage(id) {
+  return {
+    type: types.SELECT_IMAGE,
+    id
+  };
+}
+
+export function loadImages(images = []) {
+  return (dispatch, getState) => {
+    const cache = getStae();
+  }
+}
+
 function fetchImagesSuccess(body) {
   return {
     type: types.FETCH_IMAGES_SUCCESS,

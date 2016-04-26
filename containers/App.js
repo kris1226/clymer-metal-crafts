@@ -9,7 +9,6 @@ export default class App extends Component {
     super(props)
   }
   render() {
-    const { children } = this.props;
     return (
       <div>
         <NavBar />
@@ -17,7 +16,7 @@ export default class App extends Component {
             <div id="contnet">
               <div className="container">
                 <div className="col-md-12">
-                  {children}
+                  {this.props.children}
                 </div>
               </div>
             </div>

@@ -10,7 +10,7 @@ export default function ContactPage() {
                   Are you curious about something?
                 </p>
                 <p>
-                  Please feel free to contact us
+                  Feel free to contact us
                 </p>
             </div>
         </div>

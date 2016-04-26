@@ -1,6 +1,7 @@
 import * as actionTypes from '../constants/actionTypes';
 import api from '../middleware/api';
 
+
 function receiveImages(images) {
   return {
     type: actionTypes.RECEIVE_IMAGES,
@@ -9,15 +10,39 @@ function receiveImages(images) {
   };
 }
 
+const fetchImages = () => {
+  return {
+    type: actionTypes.FETCH_IMAGES_REQUEST,
+    images: function () {
+      api.getImages(images => {
+        dispatch(receiveImages(images));
+      });
+    }
+  }
+}
 export function getAllImages() {
   return dispatch => {
     api.getImages(images => {
-      dispatch(receiveImages(images));
+      return dispatch(receiveImages(images));
     });
   };
 }
 
-function selectImageUnsafe(imageId) {
+export function loadImages() {
+  debugger
+  return (dispatch, getState) => {
+    debugger;
+    const imageCache = getState().images;
+    debugger;
+    if (imageCache === null) {
+      return null;
+    }
+    return dispatch(fetchImages());
+  }
+}
+
+
+const selectImageUnsafe = (imageId) => {
   return {
     type: actionTypes.VIEW_IMAGE_DETAILS,
     imageId
@@ -27,51 +52,11 @@ function selectImageUnsafe(imageId) {
 export function selectImage(imageId) {
   return (dispatch, getState) => {
     if (getState().byId[imageId] != null) {
-      dispatch(selectImageUnsafe(imageId));
+      return dispatch(selectImageUnsafe(imageId));
     }
   };
 }
 
-export function invalidateClient(reddit) {
-  return {
-    type: INVALIDATE_CLIENT,
-    client
-  }
-}
-
-function requestClients() {
-  return {
-    type: REQUEST_DATA
-  };
-}
-
-export function fetchClients() {
-  return dispatch => {
-    dispatch(requestClients());
-    return fetch(`https://api.github.com/users`)
-      .then(response => response.json())
-      .then(json => dispatch(receiveClients(json)));
-  }
-}
-
-function shouldFetchClients(state) {
-  const clients = state.clients;
-  if (!clients) {
-    return true
-  }
-  if (clients.isFetching) {
-    return false
-  }
-  return clients.didInvalidate
-}
-
-export function fetchClientsIfNeeded() {
-  return (dispatch, getState) => {
-      if(shouldFetchClients(getState())){
-        return dispatch(fetchClients());
-      }
-  };
-}
 
 export const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE';
 

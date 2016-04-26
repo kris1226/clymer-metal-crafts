@@ -2,7 +2,7 @@ import expect from 'expect';
 import * as types from '../../constants/actionTypes';
 import images from '../../reducers/images';
 
-describe('images reducers', () => {
+describe.skip('images reducers', () => {
   it('should handle selecting a image', () => {
     expect(
       images([

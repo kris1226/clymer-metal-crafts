@@ -5,6 +5,9 @@ import { loadUser } from '../actions/imagesActions';
 import Image from '../components/ImageComponents/Image';
 
 class DetailsPage extends Component {
+  constructor(props) {
+    super(props)
+  }
   render() {
     debugger;
     const { image, params, children } = this.props;
@@ -30,7 +33,7 @@ DetailsPage.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const { id } = state.router.params;
+  const { id } = state.routing.location;
   const { item } = state;
 
   return {

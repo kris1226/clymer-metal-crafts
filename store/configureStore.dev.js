@@ -24,7 +24,6 @@ const finalCreateStore = compose(
 export default function configureStore() {
   const store = finalCreateStore(reducer);
   syncHistoryMiddleWare.listenForReplays(store);
-  store.dispatch(getAllImages());
   if(module.hot) {
     //enable webpack hot module replacment for reducers
     module.hot.accept('../reducers/images', () => {

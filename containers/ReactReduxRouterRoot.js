@@ -19,7 +19,7 @@ export default class ReactReduxRouterRoot extends Component {
             <Route path="/" component={App}>
               <IndexRoute component={ImagesContainer} />
               <Route path="contact" component={ContactPage} />
-              <Route path="image/:imageId" component={DetailsPage} />
+              <Route path="/image/:imageId" component={DetailsPage} />
             </Route>
           </Router>
           <DevTools />

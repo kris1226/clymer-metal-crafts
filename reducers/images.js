@@ -1,19 +1,9 @@
 import { combineReducers } from 'redux';
-import { routerStateReducer as router } from 'redux-router';
 import { routeReducer } from 'react-router-redux';
-import {
-  RECEIVE_IMAGES,
-  VIEW_IMAGE_DETAILS
-} from '../constants/actionTypes';
+import { RECEIVE_IMAGES, VIEW_IMAGE_DETAILS, FETCH_IMAGES_REQUEST } from '../constants/actionTypes';
+import merge from 'lodash/object/merge';
 
-export default combineReducers({
-  byId,
-  visibleIds,
-  images,
-  routing: routeReducer
-});
-
- function images(state ={}, action) {
+ const images = (state ={}, action) => {
   switch (action.type) {
     case VIEW_IMAGE_DETAILS:
       return {
@@ -24,7 +14,7 @@ export default combineReducers({
   }
 }
 
-function byId(state = {}, action) {
+const byId = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_IMAGES:
       return {
@@ -46,7 +36,7 @@ function byId(state = {}, action) {
   }
 }
 
-function visibleIds(state = [], action) {
+const visibleIds = (state = [], action) => {
   switch (action.type) {
     case RECEIVE_IMAGES:
       return action.images.map(image => image.id);
@@ -62,3 +52,28 @@ export function getImage(state, id) {
 export function getVisibleImages(state) {
   return state.visibleIds.map(id => getImage(state, id));
 }
+
+const updateImages = ( state = {
+  ...state,
+  isFetching: false,
+  images: [],
+}, action) => {
+  switch (action.type) {
+    case FETCH_IMAGES_REQUEST:
+      debugger;
+      return merge({}, state, {
+        isFetching: true
+      });
+    default:
+      return state;
+  }
+}
+const imagesReducer = combineReducers({
+  byId,
+  visibleIds,
+  images,
+  updateImages,
+  routing: routeReducer,
+});
+
+export default imagesReducer;

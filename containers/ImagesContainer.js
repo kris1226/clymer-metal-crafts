@@ -4,11 +4,23 @@ import { getVisibleImages, getImage } from '../reducers/images';
 import { routeActions } from 'react-router-redux';
 import ImageItem from '../components/ImageComponents/ImageItem';
 import ImagesList from '../components/ImageComponents/ImagesList';
-import { selectImage } from '../actions/imagesActions';
+import { selectImage, getAllImages } from '../actions/imagesActions';
 
+const loadData = (props) => {
+  props.getAllImages();
+}
 export default class ImagesContianer extends Component {
   constructor(props) {
     super(props)
+  }
+  componentWillMount() {
+    loadData(this.props);
+  }
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.images === null) {
+      debugger;
+      loadData(nextProps)
+    }
   }
   render() {
     const { images, selectImage, push } = this.props;
@@ -39,7 +51,9 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(ImagesContianer);
+export default connect(mapStateToProps, {
+  getAllImages
+})(ImagesContianer);
 
 
 
