@@ -4,9 +4,15 @@
   "description": "item viewer",
   "main": "index.js",
   "scripts": {
+    "postinstall": "npm prune",
+    "prestart": "npm install",
     "start": "node server.js",
     "test": "SET NODE_ENV=test && mocha --recursive --compilers js:babel-core/register --require ./test/setup.js",
     "test:watch": "npm test -- --watch"
+  },
+  "engines": {
+    "npm": "3.3.6",
+    "node": "4.2.1"
   },
   "repository": {
     "type": "git",
